@@ -14,6 +14,10 @@ public class CMD : MonoBehaviour {
 	public Rect outputBox;
 	private string output = "";
 
+	public Vector2 nativeResolution;
+
+	public Font myFont;
+
 	private string currentDirectory = "/";
 
 	private Dictionary<string, string> filesystem = new Dictionary<string, string>{
@@ -23,6 +27,11 @@ public class CMD : MonoBehaviour {
 	};
 
 	void OnGUI() {
+		// scale properly
+
+		GUI.matrix = Matrix4x4.TRS (Vector3.zero, Quaternion.identity, new Vector3(Screen.width / nativeResolution.x, Screen.height / nativeResolution.y, 1));
+		GUI.skin.label.font = GUI.skin.box.font = GUI.skin.button.font = GUI.skin.textArea.font = GUI.skin.textField.font = myFont;
+
 		GUI.Label(promptLocation, prompt);
 
 		command = GUI.TextField(cmdPrompt, command);
