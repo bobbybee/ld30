@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Character : MonoBehaviour {
+public class OpenCharacter : MonoBehaviour {
 
-	public float movementSpeed = 0.2f;
+	public float movementSpeed = 0.1f;
 
 	void Start () {
 	
