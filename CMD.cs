@@ -139,6 +139,7 @@ public class CMD : MonoBehaviour {
 
 	string tpCommand(string[] parts) {
 		if(parts.Length < 2) {
+			beep ();
 			return "usage: tp [prisoner id] [location]";
 		} else {
 			string prisonerId = parts[1];
