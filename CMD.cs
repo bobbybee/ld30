@@ -22,16 +22,6 @@ public class CMD : MonoBehaviour {
 		{"/purgatory/internalmemos.txt", "Supervisor? When I was evaluating someone's life, they received a negative verdict.\nWeird thing is, they went over to the Heaven door, and tried to get in.\nObviously, we have good security, but it's just suspicious.\n~Life Evaluator\n\nAlright, I'm looking into it. They seem to be in Hell, so it doesn't matter much now.\n~Supervisor"}
 	};
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void OnGUI() {
 		GUI.Label(promptLocation, prompt);
 
@@ -51,6 +41,7 @@ public class CMD : MonoBehaviour {
 		if(parts[0] == "help") return helpCommand(parts);
 		else if(parts[0] == "version") return versionCommand(parts);
 		else if(parts[0] == "clear") return clearCommand(parts);
+		else if(parts[0] == "exit") return exitCommand(parts);
 		else if(parts[0] == "pwd") return pwdCommand(parts);
 		else if(parts[0] == "ls") return lsCommand(parts);
 		else if(parts[0] == "cat") return catCommand(parts);
@@ -63,6 +54,7 @@ public class CMD : MonoBehaviour {
 				"help: takes you to this help\n"+
 				"version: dumps version information on shell\n"+
 				"clear: clears shell window\n"+
+				"exit: exits the shell\n"+
 				"pwd: dumps current working directory\n"+
 				"ls: lists files in current directory\n"+
 				"cat: dumps a file or stream to stdout\n";
@@ -74,6 +66,11 @@ public class CMD : MonoBehaviour {
 
 	string clearCommand(string[] parts) {
 		output = "";
+		return "";
+	}
+
+	string exitCommand(string[] parts) {
+		// TODO: switch scenes back into control room
 		return "";
 	}
 
