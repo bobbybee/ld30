@@ -23,7 +23,8 @@ public class CMD : MonoBehaviour {
 	private Dictionary<string, string> filesystem = new Dictionary<string, string>{
 		{"/heaven/passcodes.txt", "Old passcode: 1234\n\nApparently, a hacker bruteforced our passcode with a dictionary attack.\nTherefore, here is the new passcode:\n\n830160063270632"},
 		{"/hell/h4x0r.1337.was.here", "h37 1 4wn3d ur s3c4r1ty 1m s00 1337"},
-		{"/purgatory/internalmemos.txt", "Supervisor? When I was evaluating someone's life, they received a negative verdict.\nWeird thing is, they went over to the Heaven door, and tried to get in.\nObviously, we have good security, but it's just suspicious.\n~Life Evaluator\n\nAlright, I'm looking into it. They seem to be in Hell, so it doesn't matter much now.\n~Supervisor"}
+		{"/purgatory/internalmemos.txt", "Supervisor? When I was evaluating someone's life, they received a negative verdict.\nWeird thing is, they went over to the Heaven door, and tried to get in.\nObviously, we have good security, but it's just suspicious.\n~Life Evaluator\n\nAlright, I'm looking into it. They seem to be in Hell, so it doesn't matter much now.\n~Supervisor"},
+		{"/hell/prisonlist.db", "ID | Name\n0 | John the Ripper\n1 | Sabu\n2 | #ffffffhat\n3 | The Dev of This Game\n4 | The Artist of This Game\n5 | Random Guy Making Inside Jokes For This Game\n"}
 	};
 
 	void OnGUI() {
@@ -33,7 +34,7 @@ public class CMD : MonoBehaviour {
 		GUI.skin.label.font = GUI.skin.box.font = GUI.skin.button.font = GUI.skin.textArea.font = GUI.skin.textField.font = myFont;
 
 		GUI.Label(promptLocation, prompt);
-
+		 
 		command = GUI.TextField(cmdPrompt, command);
 
 		if(GUI.Button(enterButton, "ENTER") || (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return) ) {
@@ -54,6 +55,7 @@ public class CMD : MonoBehaviour {
 		else if(parts[0] == "pwd") return pwdCommand(parts);
 		else if(parts[0] == "ls") return lsCommand(parts);
 		else if(parts[0] == "cat") return catCommand(parts);
+		else if(parts[0] == "tp") return tpCommand(parts);
 		else return parts[0]+": command not found";
 	}
 
@@ -66,7 +68,8 @@ public class CMD : MonoBehaviour {
 				"exit: exits the shell\n"+
 				"pwd: dumps current working directory\n"+
 				"ls: lists files in current directory\n"+
-				"cat: dumps a file or stream to stdout\n";
+				"cat: dumps a file or stream to stdout\n"+
+				"tp: its a mystery\n";
 	}
 
 	string versionCommand(string[] parts) {
@@ -96,7 +99,7 @@ public class CMD : MonoBehaviour {
 			} else if(directory == "/heaven") {
 				return "lolcat.png nyancat.mp4 passcodes.txt";
 			} else if(directory == "/hell") {
-				return "punkmusic.mp3 h4x0r.1337.was.here";
+				return "punkmusic.mp3 h4x0r.1337.was.here prisonlist.db";
 			} else if(directory == "/purgatory") {
 				return "internalmemos.txt";
 			}
@@ -113,13 +116,31 @@ public class CMD : MonoBehaviour {
 
 			if(file == "/heaven/lolcat.png" || file == "/heaven/nyancat.mp4" || file == "/hell/punkmusic.mp3") {
 				return "Format error: input binary file cannot be redirected to stdout";
-			} else if(file == "/heaven/passcodes.txt" || file == "/hell/h4x0r.1337.was.here" || file == "/purgatory/internalmemos.txt") {
+			} else if(file == "/heaven/passcodes.txt" || file == "/hell/h4x0r.1337.was.here" || file == "/purgatory/internalmemos.txt" || file == "/hell/prisonlist.db") {
 				return filesystem[file];
 			} else {
 				return "file not found. try absolute paths?";
 			}
 		} else {
 			return "Pipe error: cannot redirect stdin to stdout";
+		}
+	}
+
+	string tpCommand(string[] parts) {
+		if(parts.Length < 2) {
+			return "usage: tp [prisoner id] [location]";
+		} else {
+			string prisonerId = parts[1];
+			string location = parts[2];
+
+			if(prisonerId != "2") {
+				return "permission denied: no access to prisoner id";
+			} else if(location != "hell") {
+				return "permission denied: no access to location";
+			} else {
+				Application.LoadLevel("hell");
+				return "";
+			}
 		}
 	}
 }
