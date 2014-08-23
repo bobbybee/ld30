@@ -39,6 +39,11 @@ public class CMD : MonoBehaviour {
 	string EvaluateCommand(string command) {
 		string[] parts = command.Split (' ');
 
-		return parts[0]+" not found";
+		if(parts[0] == "help") return helpCommand(parts);
+		else return parts[0]+": command not found";
+	}
+
+	string helpCommand(string[] parts) {
+		return "hsh (hell shell) help:\ncommands: \nhelp: takes you to this help";
 	}
 }
