@@ -40,10 +40,25 @@ public class CMD : MonoBehaviour {
 		string[] parts = command.Split (' ');
 
 		if(parts[0] == "help") return helpCommand(parts);
+		else if(parts[0] == "version") return versionCommand(parts);
+		else if(parts[0] == "clear") return clearCommand(parts);
 		else return parts[0]+": command not found";
 	}
 
 	string helpCommand(string[] parts) {
-		return "hsh (hell shell) help:\ncommands: \nhelp: takes you to this help";
+		return "hsh (hell shell) help:\n" +
+				"commands: \n"+
+				"help: takes you to this help\n"+
+				"version: dumps version information on shell\n"+
+				"clear: clears shell window";
+	}
+
+	string versionCommand(string[] parts) {
+		return "hsh (hell shell) version 666.216";
+	}
+
+	string clearCommand(string[] parts) {
+		output = "";
+		return "";
 	}
 }
