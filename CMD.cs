@@ -79,7 +79,7 @@ public class CMD : MonoBehaviour {
 	}
 
 	string exitCommand(string[] parts) {
-		// TODO: switch scenes back into control room
+		Application.LoadLevel("control room");
 		return "";
 	}
 
