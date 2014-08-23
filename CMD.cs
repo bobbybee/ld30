@@ -35,6 +35,8 @@ public class CMD : MonoBehaviour {
 
 		GUI.Label(promptLocation, prompt);
 		 
+
+		GUI.SetNextControlName("command");
 		command = GUI.TextField(cmdPrompt, command);
 
 		if(GUI.Button(enterButton, "ENTER") || (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return) ) {
@@ -43,6 +45,8 @@ public class CMD : MonoBehaviour {
 		}
 
 		GUI.TextField(outputBox, output);
+	
+		GUI.FocusControl("command");
 	}
 
 	void beep() {
@@ -148,11 +152,11 @@ public class CMD : MonoBehaviour {
 			if(prisonerId != "2") {
 				beep();
 				return "permission denied: no access to prisoner id";
-			} else if(location != "hell") {
+			} else if(location != "hell" && location != "purgatory") {
 				beep ();
-				return "permission denied: no access to location";
+				return "permission denied: no access to location "+location;
 			} else {
-				Application.LoadLevel("hell");
+				Application.LoadLevel(location);
 				return "";
 			}
 		}
