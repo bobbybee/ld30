@@ -13,6 +13,8 @@ public class CMD : MonoBehaviour {
 	public Rect outputBox;
 	private string output = "";
 
+	private string currentDirectory = "/";
+
 	// Use this for initialization
 	void Start () {
 	
@@ -42,6 +44,8 @@ public class CMD : MonoBehaviour {
 		if(parts[0] == "help") return helpCommand(parts);
 		else if(parts[0] == "version") return versionCommand(parts);
 		else if(parts[0] == "clear") return clearCommand(parts);
+		else if(parts[0] == "pwd") return pwdCommand(parts);
+		else if(parts[0] == "ls") return lsCommand(parts);
 		else return parts[0]+": command not found";
 	}
 
@@ -50,7 +54,9 @@ public class CMD : MonoBehaviour {
 				"commands: \n"+
 				"help: takes you to this help\n"+
 				"version: dumps version information on shell\n"+
-				"clear: clears shell window";
+				"clear: clears shell window\n"+
+				"pwd: dumps current working directory\n"+
+				"ls: lists files in current directory";
 	}
 
 	string versionCommand(string[] parts) {
@@ -60,5 +66,19 @@ public class CMD : MonoBehaviour {
 	string clearCommand(string[] parts) {
 		output = "";
 		return "";
+	}
+
+	string pwdCommand(string[] parts) {
+		return currentDirectory;
+	}
+
+	string lsCommand(string[] parts) {
+		if(parts.Length > 1) {
+			string directory = parts[1];
+
+			return "listing files in directory "+directory;
+		} else {
+			return lsCommand(new string[]{"ls", currentDirectory});
+		}
 	}
 }
