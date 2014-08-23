@@ -76,6 +76,16 @@ public class CMD : MonoBehaviour {
 		if(parts.Length > 1) {
 			string directory = parts[1];
 
+			if(directory == "/") {
+				return "heaven hell purgatory";
+			} else if(directory == "heaven") {
+				return "lolcat.png nyancat.mp4 passcodes.txt";
+			} else if(directory == "hell") {
+				return "punkmusic.mp3 h4x0r.1337.was.here";
+			} else if(directory == "purgatory") {
+				return "internalmemos.txt";
+			}
+
 			return "listing files in directory "+directory;
 		} else {
 			return lsCommand(new string[]{"ls", currentDirectory});
