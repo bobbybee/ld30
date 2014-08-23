@@ -49,7 +49,11 @@ public class Keypad : MonoBehaviour {
 							powIndex++;
 						}
 
-						Debug.Log (trying);
+						if(trying == GameGlobals.passcode) {
+							// success
+						} else {
+							// fail
+						}
 					} else {
 						Debug.Log (buttonLabels[index]);
 					}

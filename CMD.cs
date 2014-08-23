@@ -21,7 +21,7 @@ public class CMD : MonoBehaviour {
 	private string currentDirectory = "/";
 
 	private Dictionary<string, string> filesystem = new Dictionary<string, string>{
-		{"/heaven/passcodes.txt", "Old passcode: 1234\n\nApparently, a hacker bruteforced our passcode with a dictionary attack.\nTherefore, here is the new passcode:\n\n830160063270632"},
+		{"/heaven/passcodes.txt", "Old passcode: 1234\n\nApparently, a hacker bruteforced our passcode with a dictionary attack.\nTherefore, here is the new passcode:\n\n"+GameGlobals.passcode},
 		{"/hell/h4x0r.1337.was.here", "h37 1 4wn3d ur s3c4r1ty 1m s00 1337"},
 		{"/purgatory/internalmemos.txt", "Supervisor? When I was evaluating someone's life, they received a negative verdict.\nWeird thing is, they went over to the Heaven door, and tried to get in.\nObviously, we have good security, but it's just suspicious.\n~Life Evaluator\n\nAlright, I'm looking into it. They seem to be in Hell, so it doesn't matter much now.\n~Supervisor"},
 		{"/hell/prisonlist.db", "ID | Name\n0 | John the Ripper\n1 | Sabu\n2 | #ffffffhat\n3 | The Dev of This Game\n4 | The Artist of This Game\n5 | Random Guy Making Inside Jokes For This Game\n"}
