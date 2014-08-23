@@ -15,7 +15,13 @@ public class CMD : MonoBehaviour {
 	private string output = "";
 
 	private string currentDirectory = "/";
-	
+
+	private Dictionary<string, string> filesystem = new Dictionary<string, string>{
+		{"/heaven/passcodes.txt", "Old passcode: 1234\n\nApparently, a hacker bruteforced our passcode with a dictionary attack.\nTherefore, here is the new passcode:\n\n830160063270632"},
+		{"/hell/h4x0r.1337.was.here", "h37 1 4wn3d ur s3c4r1ty 1m s00 1337"},
+		{"/purgatory/internalmemos.txt", "Supervisor? When I was evaluating someone's life, they received a negative verdict.\nWeird thing is, they went over to the Heaven door, and tried to get in.\nObviously, we have good security, but it's just suspicious.\n~Life Evaluator\n\nAlright, I'm looking into it. They seem to be in Hell, so it doesn't matter much now.\n~Supervisor"}
+	};
+
 	// Use this for initialization
 	void Start () {
 	
@@ -102,7 +108,7 @@ public class CMD : MonoBehaviour {
 			if(file == "/heaven/lolcat.png" || file == "/heaven/nyancat.mp4" || file == "/hell/punkmusic.mp3") {
 				return "Format error: input binary file cannot be redirected to stdout";
 			} else if(file == "/heaven/passcodes.txt" || file == "/hell/h4x0r.1337.was.here" || file == "/purgatory/internalmemos.txt") {
-				return "todo";
+				return filesystem[file];
 			} else {
 				return "file not found. try absolute paths?";
 			}
