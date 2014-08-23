@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CMD : MonoBehaviour {
 
@@ -14,7 +15,7 @@ public class CMD : MonoBehaviour {
 	private string output = "";
 
 	private string currentDirectory = "/";
-
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -46,6 +47,7 @@ public class CMD : MonoBehaviour {
 		else if(parts[0] == "clear") return clearCommand(parts);
 		else if(parts[0] == "pwd") return pwdCommand(parts);
 		else if(parts[0] == "ls") return lsCommand(parts);
+		else if(parts[0] == "cat") return catCommand(parts);
 		else return parts[0]+": command not found";
 	}
 
@@ -56,7 +58,8 @@ public class CMD : MonoBehaviour {
 				"version: dumps version information on shell\n"+
 				"clear: clears shell window\n"+
 				"pwd: dumps current working directory\n"+
-				"ls: lists files in current directory";
+				"ls: lists files in current directory\n"+
+				"cat: dumps a file or stream to stdout\n";
 	}
 
 	string versionCommand(string[] parts) {
@@ -78,17 +81,33 @@ public class CMD : MonoBehaviour {
 
 			if(directory == "/") {
 				return "heaven hell purgatory";
-			} else if(directory == "heaven") {
+			} else if(directory == "/heaven") {
 				return "lolcat.png nyancat.mp4 passcodes.txt";
-			} else if(directory == "hell") {
+			} else if(directory == "/hell") {
 				return "punkmusic.mp3 h4x0r.1337.was.here";
-			} else if(directory == "purgatory") {
+			} else if(directory == "/purgatory") {
 				return "internalmemos.txt";
 			}
 
-			return "listing files in directory "+directory;
+			return "directory "+directory+" not found. try absolute paths?";
 		} else {
 			return lsCommand(new string[]{"ls", currentDirectory});
+		}
+	}
+
+	string catCommand(string[] parts) {
+		if(parts.Length > 1) {
+			string file = parts[1];
+
+			if(file == "/heaven/lolcat.png" || file == "/heaven/nyancat.mp4" || file == "/hell/punkmusic.mp3") {
+				return "Format error: input binary file cannot be redirected to stdout";
+			} else if(file == "/heaven/passcodes.txt" || file == "/hell/h4x0r.1337.was.here" || file == "/purgatory/internalmemos.txt") {
+				return "todo";
+			} else {
+				return "file not found. try absolute paths?";
+			}
+		} else {
+			return "Pipe error: cannot redirect stdin to stdout";
 		}
 	}
 }
