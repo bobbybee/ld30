@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿	 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -45,6 +45,10 @@ public class CMD : MonoBehaviour {
 		GUI.TextField(outputBox, output);
 	}
 
+	void beep() {
+		audio.Play();
+	}
+
 	string EvaluateCommand(string command) {
 		string[] parts = command.Split (' ');
 
@@ -56,7 +60,10 @@ public class CMD : MonoBehaviour {
 		else if(parts[0] == "ls") return lsCommand(parts);
 		else if(parts[0] == "cat") return catCommand(parts);
 		else if(parts[0] == "tp") return tpCommand(parts);
-		else return parts[0]+": command not found";
+		else {
+			beep();
+			return parts[0]+": command not found";
+		}
 	}
 
 	string helpCommand(string[] parts) {
@@ -104,6 +111,7 @@ public class CMD : MonoBehaviour {
 				return "internalmemos.txt";
 			}
 
+			beep();
 			return "directory "+directory+" not found. try absolute paths?";
 		} else {
 			return lsCommand(new string[]{"ls", currentDirectory});
@@ -115,13 +123,16 @@ public class CMD : MonoBehaviour {
 			string file = parts[1];
 
 			if(file == "/heaven/lolcat.png" || file == "/heaven/nyancat.mp4" || file == "/hell/punkmusic.mp3") {
+				beep ();
 				return "Format error: input binary file cannot be redirected to stdout";
 			} else if(file == "/heaven/passcodes.txt" || file == "/hell/h4x0r.1337.was.here" || file == "/purgatory/internalmemos.txt" || file == "/hell/prisonlist.db") {
 				return filesystem[file];
 			} else {
+				beep ();
 				return "file not found. try absolute paths?";
 			}
 		} else {
+			beep ();
 			return "Pipe error: cannot redirect stdin to stdout";
 		}
 	}
@@ -134,8 +145,10 @@ public class CMD : MonoBehaviour {
 			string location = parts[2];
 
 			if(prisonerId != "2") {
+				beep();
 				return "permission denied: no access to prisoner id";
 			} else if(location != "hell") {
+				beep ();
 				return "permission denied: no access to location";
 			} else {
 				Application.LoadLevel("hell");
