@@ -19,6 +19,8 @@ public class Guard : MonoBehaviour {
 			keyGrabbed = false;
 			isPortal = true;
 
+			transform.localScale = new Vector3(2,2,1);
+
 			(renderer as SpriteRenderer).sprite = portalSprite;
 		}
 	}
