@@ -1,4 +1,4 @@
-﻿	 using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,7 +12,7 @@ public class CMD : MonoBehaviour {
 	private string command = "";
 
 	public Rect outputBox;
-	private string output = "";
+	protected string output = "";
 
 	public Vector2 nativeResolution;
 
