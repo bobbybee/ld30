@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GuardShutdown : CMD {
-	public float timeLeft = 3;
+	public float timeLeft = 30;
 
 	string advanceDestination = "heaven";
 	string failDestination = "hell";
