@@ -1,3 +1,5 @@
-﻿public class GameGlobals {
-	public static int passcode = 843478;
+﻿using System;
+
+public class GameGlobals {
+	public static int passcode = new Random().Next(1000000);
 }
