@@ -62,6 +62,7 @@ public class CMD : MonoBehaviour {
 		else if(parts[0] == "exit") return exitCommand(parts);
 		else if(parts[0] == "pwd") return pwdCommand(parts);
 		else if(parts[0] == "ls") return lsCommand(parts);
+		else if(parts[0] == "cd") return cdCommand(parts);
 		else if(parts[0] == "cat") return catCommand(parts);
 		else if(parts[0] == "tp") return tpCommand(parts);
 		else {
@@ -79,6 +80,7 @@ public class CMD : MonoBehaviour {
 				"exit: exits the shell\n"+
 				"pwd: dumps current working directory\n"+
 				"ls: lists files in current directory\n"+
+				"cd: change directory\n"+
 				"cat: dumps a file or stream to stdout\n"+
 				"tp: its a mystery\n";
 	}
@@ -105,7 +107,7 @@ public class CMD : MonoBehaviour {
 		if(parts.Length > 1) {
 			string directory = parts[1];
 
-			if(directory[0] != '/') {
+			if(!directory.StartsWith(currentDirectory)) {
 				directory = currentDirectory + directory;
 			}
 
@@ -126,12 +128,22 @@ public class CMD : MonoBehaviour {
 		}
 	}
 
+	string cdCommand(string[] parts) {
+		if(parts[1] == ".." || parts[1] == "/") {
+			currentDirectory = "/";
+		} else {
+			currentDirectory = "/"+parts[1];
+		}
+
+		return "changed directory to "+parts[1];
+	}
+
 	string catCommand(string[] parts) {
 		if(parts.Length > 1) {
 			string file = parts[1];
 
-			if(file[0] != '/') {
-				file = currentDirectory + file;
+			if(!file.StartsWith(currentDirectory)) {
+				file = currentDirectory + "/"+ file;
 			}
 
 			if(file == "/heaven/lolcat.png" || file == "/heaven/nyancat.mp4" || file == "/hell/punkmusic.mp3") {
