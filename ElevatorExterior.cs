@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class ElevatorExterior : MonoBehaviour {
-	public string elevatorName = "PurgToHell";
+	public string elevatorName = "elevatorPurgToHell";
 
 	void OnCollisionEnter2D(Collision2D collision) {
-		Application.LoadLevel("elevator"+elevatorName);
+		Application.LoadLevel(elevatorName);
 	}
 }

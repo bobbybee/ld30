@@ -10,4 +10,10 @@ public class Elevator : MonoBehaviour {
 			Application.LoadLevel(destination);
 		}
 	}
+
+	void OnGUI() {
+		if(GUI.Button(new Rect(0, 0, 300, 100), "Skip")) {
+			Application.LoadLevel(destination);
+		}
+	}
 }
