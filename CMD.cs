@@ -20,6 +20,8 @@ public class CMD : MonoBehaviour {
 
 	private string currentDirectory = "/";
 
+	protected bool tp2Heaven = false;
+
 	private Dictionary<string, string> filesystem = new Dictionary<string, string>{
 		{"/heaven/passcodes.txt", "Old passcode: 1234\n\nApparently, a hacker bruteforced our passcode with a dictionary attack.\nTherefore, here is the new passcode:\n\n"+GameGlobals.passcode},
 		{"/hell/h4x0r.1337.was.here", "h37 1 4wn3d ur s3c4r1ty 1m s00 1337"},
@@ -180,10 +182,10 @@ public class CMD : MonoBehaviour {
 			if(prisonerId != "2") {
 				beep();
 				return "permission denied: no access to prisoner id";
-			} else if(location == "heaven") {
+			} else if(location == "heaven" && !tp2Heaven) {
 				beep ();
 				return "permission denied: no tp to "+location+" from hell";
-			} else if(location != "hell" && location != "purgatory") {
+			} else if(location != "hell" && location != "purgatory" && location != "heaven") {
 				beep ();
 				return "unknown location: "+location;
 			} else {

@@ -22,15 +22,20 @@ public class GuardShutdown : CMD {
 	}
 
 	protected override string EvaluateCommand(string cmd) {
-		string[] parts = cmd.Split(' ');
-
-		if(parts.Length < 2) {
-			beep();
-
-			return "not enough options";
+		if(gaurdSlayed) {
+			return base.EvaluateCommand(cmd);
 		}
 
+		string[] parts = cmd.Split(' ');
+
 		if(parts[0] == "kill" && !gaurdSlayed) {
+			
+			if(parts.Length < 2) {
+				beep();
+				
+				return "not enough options";
+			}
+
 			if(parts[1] != "-9") {
 				beep();
 
@@ -44,27 +49,9 @@ public class GuardShutdown : CMD {
 			}
 
 			gaurdSlayed = true;
+			tp2Heaven = true;
 
 			return "Process killed\nYou have access to the central servers.\nYou now have global teleport access.\n";
-		} else if(parts[0] == "tp" && gaurdSlayed) {
-			if(parts.Length < 2) {
-				beep ();
-				return "not enough options";
-			}
-
-			if(parts[1] != "2") {
-				beep ();
-				return "wrong prisoner id";
-			}
-
-			if(parts[2] != "heaven" && parts[2] != "hell" && parts[2] != "purgatory") {
-				beep ();
-				return "unknown location";
-			}
-
-			Application.LoadLevel(parts[2]);
-
-			return "Teleporting...";
 		} else {
 			beep();
 
