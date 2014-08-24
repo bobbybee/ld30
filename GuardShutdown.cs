@@ -4,8 +4,9 @@ using System.Collections;
 public class GuardShutdown : CMD {
 	public float timeLeft = 30;
 
-	string advanceDestination = "heaven";
 	string failDestination = "hell";
+
+	bool gaurdSlayed = false;
 
 	void Start() {
 		output += "A guard process (PID 1337) saw you.\nShutdown its process in 30 seconds to proceed to heaven.\nElse, you will thrown back into hell.\n";
@@ -14,7 +15,7 @@ public class GuardShutdown : CMD {
 	void Update() {
 		timeLeft -= Time.deltaTime;
 
-		if(timeLeft <= 0) {
+		if(timeLeft <= 0 && !gaurdSlayed) {
 			beep ();
 			Application.LoadLevel(failDestination);
 		}
@@ -29,7 +30,7 @@ public class GuardShutdown : CMD {
 			return "not enough options";
 		}
 
-		if(parts[0] == "kill") {
+		if(parts[0] == "kill" && !gaurdSlayed) {
 			if(parts[1] != "-9") {
 				beep();
 
@@ -42,9 +43,28 @@ public class GuardShutdown : CMD {
 				return "pid "+parts[2]+" invalid";
 			}
 
-			Application.LoadLevel(advanceDestination);
+			gaurdSlayed = true;
 
-			return "Process killed";
+			return "Process killed\nYou have access to the central servers.\nYou now have global teleport access.\n";
+		} else if(parts[0] == "tp" && gaurdSlayed) {
+			if(parts.Length < 2) {
+				beep ();
+				return "not enough options";
+			}
+
+			if(parts[1] != "2") {
+				beep ();
+				return "wrong prisoner id";
+			}
+
+			if(parts[2] != "heaven" && parts[2] != "hell" && parts[2] != "purgatory") {
+				beep ();
+				return "unknown location";
+			}
+
+			Application.LoadLevel(parts[2]);
+
+			return "Teleporting...";
 		} else {
 			beep();
 
