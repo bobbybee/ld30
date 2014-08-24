@@ -5,9 +5,13 @@ using System.Linq;
 
 public class Keypad : MonoBehaviour {
 
+	public string destination;
 	public GUIStyle inputStyle;
 
 	List<int> numbers = new List<int>();
+
+	private bool hasStartedPlaying = false;
+	private string nextLocation;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +20,9 @@ public class Keypad : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(hasStartedPlaying && !audio.isPlaying) {
+			Application.LoadLevel(nextLocation);
+		}
 	}
 
 	void OnGUI() {
@@ -51,8 +57,13 @@ public class Keypad : MonoBehaviour {
 
 						if(trying == GameGlobals.passcode) {
 							// success
+							Debug.Log ("Correct");
+							Application.LoadLevel(destination);
 						} else {
 							// fail
+							audio.Play();
+							nextLocation = "purgatory";
+							hasStartedPlaying = true;
 						}
 					} else {
 						Debug.Log (buttonLabels[index]);
