@@ -20,6 +20,8 @@ public class CMD : MonoBehaviour {
 
 	private string currentDirectory = "/";
 
+	public string exitDestination = "control room";
+
 	protected bool tp2Heaven = false;
 
 	private Dictionary<string, string> filesystem = new Dictionary<string, string>{
@@ -100,7 +102,7 @@ public class CMD : MonoBehaviour {
 	}
 
 	string exitCommand(string[] parts) {
-		Application.LoadLevel("control room");
+		Application.LoadLevel(exitDestination);
 		return "";
 	}
 
