@@ -51,7 +51,9 @@ public class GuardShutdown : CMD {
 			gaurdSlayed = true;
 			tp2Heaven = true;
 
-			return "Process killed\nYou have access to the central servers.\nYou now have global teleport access.\n";
+			GameGlobals.heavenUnlocked = true;
+
+			return "Process killed\nYou have access to the central servers.\nYou now have global teleport access, and can use any and all standard hell shell commands.\n";
 		} else {
 			beep();
 
