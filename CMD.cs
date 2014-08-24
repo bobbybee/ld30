@@ -105,6 +105,10 @@ public class CMD : MonoBehaviour {
 		if(parts.Length > 1) {
 			string directory = parts[1];
 
+			if(directory[0] != '/') {
+				directory = currentDirectory + directory;
+			}
+
 			if(directory == "/") {
 				return "heaven hell purgatory";
 			} else if(directory == "/heaven") {
@@ -125,6 +129,10 @@ public class CMD : MonoBehaviour {
 	string catCommand(string[] parts) {
 		if(parts.Length > 1) {
 			string file = parts[1];
+
+			if(file[0] != '/') {
+				file = currentDirectory + file;
+			}
 
 			if(file == "/heaven/lolcat.png" || file == "/heaven/nyancat.mp4" || file == "/hell/punkmusic.mp3") {
 				beep ();
