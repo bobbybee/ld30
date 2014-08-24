@@ -131,8 +131,13 @@ public class CMD : MonoBehaviour {
 	string cdCommand(string[] parts) {
 		if(parts[1] == ".." || parts[1] == "/") {
 			currentDirectory = "/";
-		} else {
+		} else if(parts[1] == "hell" || parts[1] == "heaven" || parts[1] == "purgatory") {
 			currentDirectory = "/"+parts[1];
+		} else if(parts[1] == "/hell" || parts[1] == "/heaven" || parts[1] == "/purgatory") {
+			currentDirectory = parts[1];
+		} else {
+			beep ();
+			return "directory not found";
 		}
 
 		return "changed directory to "+parts[1];
