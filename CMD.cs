@@ -185,7 +185,7 @@ public class CMD : MonoBehaviour {
 			} else if(location == "heaven" && !tp2Heaven) {
 				beep ();
 				return "permission denied: no tp to "+location+" from hell";
-			} else if(location != "hell" && location != "purgatory" && location != "heaven") {
+			} else if(location != "hell" && location != "purgatory" && location != "heaven" && location != "earth") {
 				beep ();
 				return "unknown location: "+location;
 			} else {
