@@ -27,6 +27,12 @@ public class CMD : MonoBehaviour {
 		{"/hell/prisonlist.db", "ID | Name\n0 | John the Ripper\n1 | Sabu\n2 | #ffffffhat\n3 | The Dev of This Game\n4 | The Artist of This Game\n5 | Random Guy Making Inside Jokes For This Game\n"}
 	};
 
+	void ExecuteCommand() {
+		output = prompt + command + "\n" + EvaluateCommand(command) + "\n" + output;
+		command = "";
+
+	}
+
 	void OnGUI() {
 		// scale properly
 
@@ -35,18 +41,15 @@ public class CMD : MonoBehaviour {
 
 		GUI.Label(promptLocation, prompt);
 		 
-
-		GUI.SetNextControlName("command");
 		command = GUI.TextField(cmdPrompt, command);
 
-		if(GUI.Button(enterButton, "ENTER") || (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.Return) ) {
-			output = prompt + command + "\n" + EvaluateCommand(command) + "\n" + output;
-			command = "";
+
+		if(GUI.Button(enterButton, "ENTER") || (Event.current.isKey && (Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.KeypadEnter) ) ) {
+			ExecuteCommand();
 		}
 
 		GUI.TextField(outputBox, output);
 	
-		GUI.FocusControl("command");
 	}
 
 	protected void beep() {
@@ -177,9 +180,12 @@ public class CMD : MonoBehaviour {
 			if(prisonerId != "2") {
 				beep();
 				return "permission denied: no access to prisoner id";
+			} else if(location == "heaven") {
+				beep ();
+				return "permission denied: no tp to "+location+" from hell";
 			} else if(location != "hell" && location != "purgatory") {
 				beep ();
-				return "permission denied: no access to location "+location;
+				return "unknown location: "+location;
 			} else {
 				Application.LoadLevel(location);
 				return "";
