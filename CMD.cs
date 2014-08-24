@@ -4,17 +4,17 @@ using System.Collections.Generic;
 
 public class CMD : MonoBehaviour {
 
-	public Rect promptLocation;
+	public Rect promptLocation = new Rect(10, 10, 20, 30);
 	public string prompt = "> ";
 
-	public Rect cmdPrompt;
-	public Rect enterButton;
+	public Rect cmdPrompt = new Rect(30, 10, 1790, 30);
+	public Rect enterButton = new Rect(1830, 10, 80, 30);
 	private string command = "";
 
-	public Rect outputBox;
+	public Rect outputBox = new Rect(10, 50, 1900, 1010);
 	protected string output = "";
 
-	public Vector2 nativeResolution;
+	public Vector2 nativeResolution = new Vector2(1920, 1080);
 
 	public Font myFont;
 
@@ -49,11 +49,11 @@ public class CMD : MonoBehaviour {
 		GUI.FocusControl("command");
 	}
 
-	void beep() {
+	protected void beep() {
 		audio.Play();
 	}
 
-	string EvaluateCommand(string command) {
+	protected virtual string EvaluateCommand(string command) {
 		string[] parts = command.Split (' ');
 
 		if(parts[0] == "help") return helpCommand(parts);
