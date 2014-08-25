@@ -7,17 +7,15 @@ public class CMD : MonoBehaviour {
 	public Rect promptLocation = new Rect(10, 10, 20, 30);
 	public string prompt = "> ";
 
-	public Rect cmdPrompt = new Rect(30, 10, 1790, 30);
-	public Rect enterButton = new Rect(1830, 10, 80, 30);
+	public Rect cmdPrompt = new Rect(30, 10, 1790, 35);
+	public Rect enterButton = new Rect(1820, 10, 95, 35);
 	private string command = "";
 
-	public Rect outputBox = new Rect(10, 50, 1900, 1010);
+	public Rect outputBox = new Rect(10, 55, 1900, 1010);
 	protected string output = "";
 
 	public Vector2 nativeResolution = new Vector2(1920, 1080);
-
-	public Font myFont;
-
+	
 	private string currentDirectory = "/";
 
 	public string exitDestination = "control room";
@@ -41,7 +39,6 @@ public class CMD : MonoBehaviour {
 		// scale properly
 
 		GUI.matrix = Matrix4x4.TRS (Vector3.zero, Quaternion.identity, new Vector3(Screen.width / nativeResolution.x, Screen.height / nativeResolution.y, 1));
-		GUI.skin.label.font = GUI.skin.box.font = GUI.skin.button.font = GUI.skin.textArea.font = GUI.skin.textField.font = myFont;
 
 		GUI.Label(promptLocation, prompt);
 		 
